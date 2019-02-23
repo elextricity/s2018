@@ -496,7 +496,23 @@ void drawchar(uint8_t *buff, uint8_t x, uint8_t line, uint8_t c) {
 
 // the most basic function, set a single pixel
 void setpixel(uint8_t *buff, uint8_t x, uint8_t y, uint8_t color) {
-	
+	/* Find the corresponding byte in the software buffer 
+		-> First position within our array is at the top left of the screen
+		-> The 128th byte in the array (Array[127]) is on the first page at the right hand side of screen
+		-> Next bit “wraps” to the next page, at page 1 column 1
+		-> To calculate which byte is needed, we divide the Y position by 8 and multiply the result by 128. 
+		   To this we add the X position and subtract 1 (index starts at 0). 
+			-> (1,1) on the screen would give 1 + ( 1/8 *128 ) -1 = 0
+			-> (61,52) on the screen would give 61 + ( 52/8 *128 ) -1 = 828 */
+	buff[((y/8)*128)+x-1] |= (1 << 7 - y%8);
+	 /* Calculate the bit within this byte
+	   	-> Remember that the 8th (MSB) appears at bottom of the page.
+		-> So, to write to Y location ‘8’ , we need to set the 8th bit of a byte on first page. 
+		   Similarly, to write to Y location ‘16’, we need to write to 8th bit of corresponding byte on second page.
+		-> This is simply Y%8 */
+	 /* Use logical OR (to set the bit) or AND (to clear the bit)
+	   
+	 */
 }
 
 // function to clear a single pixel
