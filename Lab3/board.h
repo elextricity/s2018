@@ -18,4 +18,4 @@ typedef struct board {
 } board;
 
 
-void draw_board(board* board);
+void draw_board(board* board, uint8_t *buff);

@@ -9,6 +9,6 @@ typedef struct score {
 } score;
 
 
-draw_score(score* scores) {
-	
-}
+draw_score(score* scores, uint8_t *buff); 
+
+update_score(score* scores, int player);
