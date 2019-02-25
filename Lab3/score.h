@@ -1,3 +1,4 @@
+#include <stdint.h>
 
 typedef struct score {
 	int p1score;
@@ -9,6 +10,6 @@ typedef struct score {
 } score;
 
 
-draw_score(score* scores, uint8_t *buff); 
+void draw_score(score* scores, uint8_t *buff); 
 
-update_score(score* scores, int player);
+void update_score(score* scores, int player);

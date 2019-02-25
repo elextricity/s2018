@@ -1,5 +1,6 @@
 #include "board.h"
 
+
 void draw_board(board* board, uint8_t *buff) {
 	drawrect(buff, board->xstart, board->ystart, board->width, board->height, 0);
 	int i;
