@@ -504,8 +504,10 @@ void setpixel(uint8_t *buff, uint8_t x, uint8_t y, uint8_t color) {
 		   To this we add the X position and subtract 1 (index starts at 0). 
 			-> (1,1) on the screen would give 1 + ( 1/8 *128 ) -1 = 0
 			-> (61,52) on the screen would give 61 + ( 52/8 *128 ) -1 = 828 */
-	buff[((y/8)*128)+x-1] |= (1 << 7 - y%8);
-	 /* Calculate the bit within this byte
+	
+		buff[((y/8)*128)+x-1] |= (1 << y%8);
+	
+	/* Calculate the bit within this byte
 	   	-> Remember that the 8th (MSB) appears at bottom of the page.
 		-> So, to write to Y location ‘8’ , we need to set the 8th bit of a byte on first page. 
 		   Similarly, to write to Y location ‘16’, we need to write to 8th bit of corresponding byte on second page.
@@ -517,7 +519,7 @@ void setpixel(uint8_t *buff, uint8_t x, uint8_t y, uint8_t color) {
 
 // function to clear a single pixel
 void clearpixel(uint8_t *buff, uint8_t x, uint8_t y) {
-	
+	buff[((y/8)*128)+x-1] &= ~(1 << y%8);
 }
 
 // function to write a string on the lcd
