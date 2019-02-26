@@ -563,8 +563,38 @@ void drawrect(uint8_t *buff,uint8_t x, uint8_t y, uint8_t w, uint8_t h,uint8_t c
 }
 
 
+//helper function for drawing a circle with bresenham's algorithm
+void regCircle(uint8_t xc, uint8_t yc, uint8_t x, uint8_t y, uint8_t color) 
+{ 
+    setpixel(xc+x, yc+y, color); 
+    setpixel(xc-x, yc+y, color); 
+    setpixel(xc+x, yc-y, color); 
+    setpixel(xc-x, yc-y, color); 
+    setpixel(xc+y, yc+x, color); 
+    setpixel(xc-y, yc+x, color); 
+    setpixel(xc+y, yc-x, color); 
+    setpixel(xc-y, yc-x, cclor); 
+} 
+
 // function to draw a circle
 void drawcircle(uint8_t *buff,uint8_t x0, uint8_t y0, uint8_t r,uint8_t color) {
+
+    int x = 0;
+    int y = r; 
+    int d = 3 - 2 * r; 
+    regCircle(xc, yc, x, y, color); 
+    while (y >= x) { 
+        x++; 
+        if (d > 0) { 
+            y--;  
+            d = d + 4 * (x - y) + 10; 
+        } 
+        else
+            d = d + 4 * x + 6; 
+        setCircle(xc, yc, x, y, color); 
+        delay(50); 
+    }
+
 	
 }
 
