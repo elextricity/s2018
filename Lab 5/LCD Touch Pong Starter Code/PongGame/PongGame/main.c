@@ -37,7 +37,7 @@ int main(void)
 	
 	while (1)
 	{
-		drawchar(buff,0,0,displayChar);
+		setpixel(buff,0,0,0);
 		write_buffer(buff);
 		_delay_ms(5000);
 		displayChar++;
