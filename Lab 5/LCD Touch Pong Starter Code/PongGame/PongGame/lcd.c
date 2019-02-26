@@ -530,7 +530,26 @@ void drawstring(uint8_t *buff, uint8_t x, uint8_t line, uint8_t *c) {
 // use bresenham's algorithm to write this function to draw a line
 void drawline(uint8_t *buff,uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1,uint8_t color) {
 
+	int dx = x1-x0;
+	int dy = y1-y0;
+ 	int x = x0;
+	int y = y0;
+ 	int p = 2*dy-dx;
+	
+	while(x<x1) {
+		if(p>=0) {
+			setpixel(x, y, color);
+			y = y+1;
+			p = p+2*dy-2*dx;
+		}
+		else {
+			setpixel(x, y, color);
+			p = p+2*dy;
+		}
+		x = x+1;
+	}
 }
+
 
 // function to draw a filled rectangle
 void fillrect(uint8_t *buff,uint8_t x, uint8_t y, uint8_t w, uint8_t h,uint8_t color) {
